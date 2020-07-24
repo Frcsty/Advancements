@@ -1,7 +1,11 @@
 package com.github.frcsty.advancementstest;
 
-import eu.endercentral.crazy_advancements.*;
-import eu.endercentral.crazy_advancements.manager.AdvancementManager;
+import com.github.frcsty.advancementapi.AdvancementAPI;
+import com.github.frcsty.advancementapi.manager.AdvancementManager;
+import com.github.frcsty.advancementapi.wrapper.Advancement;
+import com.github.frcsty.advancementapi.wrapper.AdvancementDisplay;
+import com.github.frcsty.advancementapi.wrapper.AdvancementVisibility;
+import com.github.frcsty.advancementapi.wrapper.NameKey;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -15,7 +19,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public final class AdvancementsTest extends JavaPlugin implements Listener {
 
-    private final AdvancementManager manager = CrazyAdvancements.getNewAdvancementManager();
+    private final AdvancementManager manager = AdvancementAPI.getNewAdvancementManager();
 
     @Override
     public void onEnable() {

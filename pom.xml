@@ -67,8 +67,8 @@
         </dependency>
         <dependency>
             <groupId>com.github.frcsty</groupId>
-            <artifactId>AdvancementsAPI</artifactId>
-            <version>1.16</version>
+            <artifactId>AdvancementAPI</artifactId>
+            <version>1.0</version>
         </dependency>
     </dependencies>
 </project>

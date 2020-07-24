@@ -1,0 +1,7 @@
+name: AdvancementsTest
+version: ${project.version}
+main: com.github.frcsty.advancementstest.AdvancementsTest
+api-version: 1.13
+
+commands:
+  test:

@@ -1,5 +1,5 @@
 name: AdvancementsTest
 version: ${project.version}
-main: com.github.frcsty.advancementstest.AdvancementsTest
+main: com.github.frcsty.com.github.frcsty.advancementstest.AdvancementsTest
 api-version: 1.13
 author: Frcsty

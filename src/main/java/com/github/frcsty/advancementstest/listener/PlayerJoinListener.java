@@ -8,6 +8,8 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+
 public final class PlayerJoinListener implements Listener {
 
     @NotNull
@@ -24,6 +26,7 @@ public final class PlayerJoinListener implements Listener {
             @Override
             public void run() {
                 plugin.getManager().addPlayer(player);
+                plugin.getAvailability().put(player, new ArrayList<>());
             }
         }.runTaskLater(plugin, 2L);
     }

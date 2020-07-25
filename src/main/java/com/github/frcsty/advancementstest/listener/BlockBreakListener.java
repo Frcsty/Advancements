@@ -15,25 +15,24 @@ import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public final class BlockBreakListener implements Listener {
 
-    private static final List<Player> AVAILABILITY = new ArrayList<>();
     private static final List<Material> ALLOWED = Arrays.asList(
             Material.WOODEN_PICKAXE, Material.STONE_PICKAXE, Material.IRON_PICKAXE, Material.GOLDEN_PICKAXE,
             Material.DIAMOND_PICKAXE, Material.NETHERITE_PICKAXE);
     private static final int TOAST_DURATION = 130;
-    @NotNull private final AdvancementsTest plugin;
+    @NotNull
+    private final AdvancementsTest plugin;
 
     public BlockBreakListener(@NotNull final AdvancementsTest plugin) {
         this.plugin = plugin;
     }
 
     @EventHandler
-    public void onBlockBreak(BlockBreakEvent event) {
+    public void onBlockBreak(@NotNull final BlockBreakEvent event) {
         final Player player = event.getPlayer();
         final ItemStack item = event.getPlayer().getInventory().getItemInMainHand();
         if (item.getType() == Material.AIR && !ALLOWED.contains(item.getType())) return;
@@ -43,7 +42,7 @@ public final class BlockBreakListener implements Listener {
 
         final int durability = (item.getType().getMaxDurability() - meta.getDamage()) - 1;
 
-        if (AVAILABILITY.contains(player)) return;
+        if (plugin.getAvailability().get(player).contains(AdvancementHolder.DURABILITY_ADVANCEMENT)) return;
         handleAdvancement(item, durability, event.getPlayer());
     }
 
@@ -52,7 +51,7 @@ public final class BlockBreakListener implements Listener {
             return "§cYour item is about to break!";
         } else if (durability <= 5) {
             return "§4Low item durability! §7- §4" + durability;
-        } else if (durability <= 60){
+        } else if (durability <= 60) {
             return "§cLow item durability! §7- §c" + durability;
         } else {
             return null;
@@ -75,11 +74,11 @@ public final class BlockBreakListener implements Listener {
         final Advancement advancement = new Advancement(null, new NameKey("custom", "damage"), display);
 
         advancement.displayToast(player);
-        AVAILABILITY.add(player);
+        plugin.getAvailability().get(player).add(AdvancementHolder.DURABILITY_ADVANCEMENT);
         new BukkitRunnable() {
             @Override
             public void run() {
-                AVAILABILITY.remove(player);
+                plugin.getAvailability().get(player).remove(AdvancementHolder.DURABILITY_ADVANCEMENT);
             }
         }.runTaskLater(plugin, TOAST_DURATION);
     }

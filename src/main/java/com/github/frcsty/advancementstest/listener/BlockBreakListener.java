@@ -35,7 +35,8 @@ public final class BlockBreakListener implements Listener {
     public void onBlockBreak(@NotNull final BlockBreakEvent event) {
         final Player player = event.getPlayer();
         final ItemStack item = event.getPlayer().getInventory().getItemInMainHand();
-        if (item.getType() == Material.AIR && !ALLOWED.contains(item.getType())) return;
+        if (item.getType() == Material.AIR) return;
+        if (!ALLOWED.contains(item.getType())) return;
 
         final Damageable meta = (Damageable) item.getItemMeta();
         if (meta == null) return;
@@ -66,7 +67,7 @@ public final class BlockBreakListener implements Listener {
                 item.getType(),
                 displayTitle,
                 "",
-                AdvancementDisplay.AdvancementFrame.CHALLENGE,
+                AdvancementDisplay.AdvancementFrame.TASK,
                 true,
                 false,
                 AdvancementVisibility.VANILLA
